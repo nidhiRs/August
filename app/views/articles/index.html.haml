@@ -1,0 +1,15 @@
+%h1 Listing Articles
+%table.table
+  %tr
+    %th Title
+    %th Text
+    %th
+  - @articles.each do |article|
+    %tr
+      %td= article.title
+      %td= article.text
+      %td= link_to '<i class="fas fa-eye"></i>'.html_safe, article_path(article)
+      - if current_user.admin
+        %td= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_article_path(article)
+        %td= link_to '<i class="fas fa-trash"></i>'.html_safe, article_path(article), method: :delete, data: { confirm: 'Are you sure' }
+= link_to 'Add New Article', new_article_path

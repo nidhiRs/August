@@ -1,0 +1,15 @@
+%h1 Listing Users
+%table.table
+  %tr
+    %th First Name
+    %th Email
+    %th
+  - @users.each do |user|
+    %tr
+      %td= user.first_name
+      %td= user.email
+      %td= link_to '<i class="fas fa-eye"></i>'.html_safe, user_path(user)
+      - if current_user.admin
+        %td= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_user_path(user)
+        %td= link_to '<i class="fas fa-trash"></i>'.html_safe, user_path(user), method: :delete, data: { confirm: 'Are you sure' }
+= link_to 'Add New User', new_user_path
